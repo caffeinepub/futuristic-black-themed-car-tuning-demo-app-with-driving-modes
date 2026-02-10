@@ -1,0 +1,87 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-fix-the-backend-so-anonymous-users-can-load-and-save-car-tuning-scooter-tuning-and-fuel-injection-settings-without-authorization-traps-and-ensure-the-frontend-panels-no-longer-show-the-generic-load-failed-banners-for-these-sections-under-normal-use",
+      "featureTitle": "Fix the backend so anonymous users can load and save Car Tuning, Scooter Tuning, and Fuel Injection settings without authorization traps, and ensure the frontend panels no longer show the generic load-failed banners for these sections under normal use.",
+      "files": [
+        "frontend/src/components/CarTuningPanel.tsx",
+        "frontend/src/components/FuelInjectionPanel.tsx",
+        "frontend/src/components/ScooterTuningPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-throttle-section-as-a-real-panel-replace-the-placeholder-with-a-working-slider-control-that-lets-users-set-throttle-from-1-to-10-and-persist-reload-the-value-using-the-same-react-query-optimistic-update-pattern-as-other-settings-panels",
+      "featureTitle": "Implement the Throttle section as a real panel (replace the placeholder) with a working slider control that lets users set Throttle from 1 to 10, and persist/reload the value using the same React Query + optimistic update pattern as other settings panels.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ThrottlePanel.tsx",
+        "frontend/src/components/TuningSlider.tsx",
+        "frontend/src/hooks/useThrottleSetting.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-23"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-scooter-tuning-panel-provides-a-max-speed-control-with-a-slider-range-from-1-to-100-inclusive-and-align-backend-validation-defaults-so-saving-within-1-100-succeeds-without-errors",
+      "featureTitle": "Ensure the Scooter Tuning panel provides a Max Speed control with a slider range from 1 to 100 (inclusive), and align backend validation/defaults so saving within 1–100 succeeds without errors.",
+      "files": [
+        "frontend/src/components/ScooterTuningPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-24"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-placeholder-messaging-used-by-sectionplaceholderpanel-so-it-does-not-appear-for-sections-that-are-implemented-throttle-and-scooter-tuning-and-keep-any-remaining-placeholder-user-facing-text-in-english",
+      "featureTitle": "Update the placeholder messaging used by SectionPlaceholderPanel so it does not appear for sections that are implemented (Throttle and Scooter Tuning), and keep any remaining placeholder user-facing text in English.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/SectionPlaceholderPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-25"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

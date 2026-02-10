@@ -1,0 +1,124 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Stabilize tuning loads for anonymous users, add Throttle slider panel, and adjust Scooter Max Speed range",
+  "requirements": [
+    {
+      "id": "REQ-22",
+      "summary": "Harden frontend tuning/settings panels to avoid generic load-failed banners during normal anonymous use and surface clear backend errors via existing ErrorBanner patterns.",
+      "acceptanceCriteria": [
+        "Opening the app with no sign-in flow successfully loads the Car Tuning panel without showing “Failed to load tuning configuration. Please try refreshing the page.”",
+        "Switching to Scooter Tuning successfully loads without showing “Failed to load scooter tuning configuration. Please try refreshing the page.”",
+        "Switching to Fuel Injection successfully loads without showing “Failed to load fuel injection settings. Please try refreshing the page.”",
+        "Backend methods used by these panels do not trap solely due to missing/anonymous identity (no \"Unauthorized\" traps for these tuning/settings endpoints).",
+        "If a real backend validation error occurs (e.g., an out-of-range value), the UI continues to show a clear English error message via existing ErrorBanner patterns."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CarTuningPanel.tsx",
+          "operation": "modify",
+          "description": "Refine error rendering so load failures prefer a clear English error message from the thrown error (when available) instead of always showing the generic load-failed banner; keep existing ErrorBanner usage patterns."
+        },
+        {
+          "path": "frontend/src/components/ScooterTuningPanel.tsx",
+          "operation": "modify",
+          "description": "Refine error rendering so load failures prefer a clear English error message from the thrown error (when available) instead of always showing the generic load-failed banner; keep existing ErrorBanner usage patterns."
+        },
+        {
+          "path": "frontend/src/components/FuelInjectionPanel.tsx",
+          "operation": "modify",
+          "description": "Refine error rendering so load failures prefer a clear English error message from the thrown error (when available) instead of always showing the generic load-failed banner; keep existing ErrorBanner usage patterns."
+        },
+        {
+          "path": "frontend/src/hooks/useTuningConfig.ts",
+          "operation": "modify",
+          "description": "Ensure React Query errors propagate meaningful messages (English) for display by panels; keep the existing React Query + optimistic update approach and avoid introducing authentication gating."
+        },
+        {
+          "path": "frontend/src/hooks/useScooterTuningConfig.ts",
+          "operation": "modify",
+          "description": "Ensure React Query errors propagate meaningful messages (English) for display by panels; keep the existing React Query + optimistic update approach and avoid introducing authentication gating."
+        },
+        {
+          "path": "frontend/src/hooks/useFuelInjectionSettings.ts",
+          "operation": "modify",
+          "description": "Ensure React Query errors propagate meaningful messages (English) for display by panels; keep the existing React Query + optimistic update approach and avoid introducing authentication gating."
+        }
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "summary": "Replace the Throttle placeholder with a real Throttle panel including a 1–10 slider and React Query optimistic persistence/reload.",
+      "acceptanceCriteria": [
+        "Selecting the “Throttle” item in the top carousel renders a functional Throttle panel (not SectionPlaceholderPanel).",
+        "The Throttle panel includes a slider with a numeric value range from 1 to 10 (inclusive).",
+        "Changing the throttle value updates the UI immediately and persists it to the backend; refreshing the page restores the saved value.",
+        "Validation prevents saving values outside 1–10 and surfaces a clear English error message if attempted."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ThrottlePanel.tsx",
+          "operation": "create",
+          "description": "Create a Throttle panel UI that loads the saved throttle value, renders a slider constrained to 1–10 (inclusive), performs immediate UI updates, and shows clear English validation and backend error messages via ErrorBanner."
+        },
+        {
+          "path": "frontend/src/hooks/useThrottleSetting.ts",
+          "operation": "create",
+          "description": "Add React Query hooks to load and save the throttle setting using the same optimistic update pattern as other settings panels, backed by existing backend actor methods for throttle."
+        },
+        {
+          "path": "frontend/src/components/TuningSlider.tsx",
+          "operation": "modify",
+          "description": "Extend the reusable slider to support an integer display mode (so Throttle can display whole numbers) while preserving existing behavior for current panels."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new Throttle panel into the section switch so selecting 'throttle' renders ThrottlePanel instead of SectionPlaceholderPanel."
+        }
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "summary": "Update Scooter Tuning Max Speed control to use a 1–100 inclusive slider range and add UI-side range validation messaging.",
+      "acceptanceCriteria": [
+        "The Scooter Tuning panel visibly includes a “Max Speed” slider.",
+        "The Max Speed slider range is 1–100 (inclusive) in the UI.",
+        "Saving scooter tuning settings with Max Speed anywhere within 1–100 succeeds and persists; refreshing restores the saved value.",
+        "Backend validation for scooter maxSpeed accepts values 1–100 and rejects values outside that range with a clear English error message."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ScooterTuningPanel.tsx",
+          "operation": "modify",
+          "description": "Change the Max Speed slider configuration to min=1 and max=100 (inclusive), and add UI-side validation/clamping prevention so out-of-range values are not submitted and instead produce a clear English ErrorBanner message."
+        },
+        {
+          "path": "frontend/src/hooks/useScooterTuningConfig.ts",
+          "operation": "modify",
+          "description": "Align default/optimistic handling with the UI range update (1–100 for maxSpeed) and ensure any backend validation errors are surfaced with clear English messages for display."
+        }
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "summary": "Ensure placeholder messaging remains English and is not shown for implemented sections (Throttle and Scooter Tuning).",
+      "acceptanceCriteria": [
+        "The text “This feature is not yet available. Check back soon for updates.” is not shown when viewing Scooter Tuning or Throttle.",
+        "Any remaining placeholder sections continue to display English-only text."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Confirm implemented sections render real panels (Scooter Tuning already, Throttle after wiring) so SectionPlaceholderPanel messaging cannot appear for those sections."
+        },
+        {
+          "path": "frontend/src/components/SectionPlaceholderPanel.tsx",
+          "operation": "modify",
+          "description": "Keep placeholder text English-only and adjust wording if needed to remain clear and consistent; ensure it is suitable for any remaining unimplemented sections."
+        }
+      ]
+    }
+  ]
+}

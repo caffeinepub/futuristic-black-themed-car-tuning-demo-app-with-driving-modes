@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        --background: 0 0 0%;
+        --foreground: 0.985 0 0;
+        --card: 0.145 0 0;
+        --card-foreground: 0.985 0 0;
+        --popover: 0.145 0 0;
+        --popover-foreground: 0.985 0 0;
+        --primary: 0.7 0.15 195;
+        --primary-foreground: 0.05 0 0;
+        --secondary: 0.25 0 0;
+        --secondary-foreground: 0.985 0 0;
+        --muted: 0.25 0 0;
+        --muted-foreground: 0.6 0 0;
+        --accent: 0.7 0.15 195;
+        --accent-foreground: 0.05 0 0;
+        --destructive: 0.6 0.22 25;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.3 0.1 195 / 20%;
+        --input: 0.3 0.1 195 / 30%;
+        --ring: 0.7 0.15 195;
+        --chart-1: 0.7 0.15 195;
+        --chart-2: 0.65 0.18 240;
+        --chart-3: 0.6 0.2 280;
+        --chart-4: 0.55 0.15 320;
+        --chart-5: 0.7 0.2 160;
+    }
+
+    .dark {
+        --background: 0 0 0%;
+        --foreground: 0.985 0 0;
+        --card: 0.145 0 0;
+        --card-foreground: 0.985 0 0;
+        --popover: 0.18 0 0;
+        --popover-foreground: 0.985 0 0;
+        --primary: 0.7 0.15 195;
+        --primary-foreground: 0.05 0 0;
+        --secondary: 0.25 0 0;
+        --secondary-foreground: 0.985 0 0;
+        --muted: 0.25 0 0;
+        --muted-foreground: 0.6 0 0;
+        --accent: 0.35 0.1 195;
+        --accent-foreground: 0.985 0 0;
+        --destructive: 0.6 0.22 25;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.3 0.1 195 / 20%;
+        --input: 0.3 0.1 195 / 30%;
+        --ring: 0.7 0.15 195;
+        --chart-1: 0.7 0.15 195;
+        --chart-2: 0.65 0.18 240;
+        --chart-3: 0.6 0.2 280;
+        --chart-4: 0.55 0.15 320;
+        --chart-5: 0.7 0.2 160;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Horizontal carousel scrollbar styling */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .carousel-container {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Focus visible styles for carousel items */
+    .carousel-container button:focus-visible {
+        outline: 2px solid oklch(0.7 0.15 195);
+        outline-offset: 2px;
+    }
+}

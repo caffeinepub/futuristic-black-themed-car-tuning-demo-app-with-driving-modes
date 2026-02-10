@@ -1,0 +1,106 @@
+{
+  "kind": "build_request",
+  "title": "Fix tuning config load failures, implement Throttle slider, and adjust Scooter Max Speed range",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-22",
+      "text": "Fix the backend so anonymous users can load and save Car Tuning, Scooter Tuning, and Fuel Injection settings without authorization traps, and ensure the frontend panels no longer show the generic load-failed banners for these sections under normal use.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "An error is showing that failed to load tuning configuration. Please try refreshing the page. And then when I go to scooter tuning, same. Failed to load scooter tuning configuration. Please try refreshing the page. Oil change is okay, but fuel injection is giving problem."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Opening the app with no sign-in flow successfully loads the Car Tuning panel without showing “Failed to load tuning configuration. Please try refreshing the page.”",
+        "Switching to Scooter Tuning successfully loads without showing “Failed to load scooter tuning configuration. Please try refreshing the page.”",
+        "Switching to Fuel Injection successfully loads without showing “Failed to load fuel injection settings. Please try refreshing the page.”",
+        "Backend methods used by these panels do not trap solely due to missing/anonymous identity (no \"Unauthorized\" traps for these tuning/settings endpoints).",
+        "If a real backend validation error occurs (e.g., an out-of-range value), the UI continues to show a clear English error message via existing ErrorBanner patterns."
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Implement the Throttle section as a real panel (replace the placeholder) with a working slider control that lets users set Throttle from 1 to 10, and persist/reload the value using the same React Query + optimistic update pattern as other settings panels.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Throttle. Throttle control is nothing. Like you must give a slider option from 1 to 10."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Selecting the “Throttle” item in the top carousel renders a functional Throttle panel (not SectionPlaceholderPanel).",
+        "The Throttle panel includes a slider with a numeric value range from 1 to 10 (inclusive).",
+        "Changing the throttle value updates the UI immediately and persists it to the backend; refreshing the page restores the saved value.",
+        "Validation prevents saving values outside 1–10 and surfaces a clear English error message if attempted."
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "text": "Ensure the Scooter Tuning panel provides a Max Speed control with a slider range from 1 to 100 (inclusive), and align backend validation/defaults so saving within 1–100 succeeds without errors.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "And where is the max speed option, bro? ... Bro, give it a speed from 1 to 100. Please."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Scooter Tuning panel visibly includes a “Max Speed” slider.",
+        "The Max Speed slider range is 1–100 (inclusive) in the UI.",
+        "Saving scooter tuning settings with Max Speed anywhere within 1–100 succeeds and persists; refreshing restores the saved value.",
+        "Backend validation for scooter maxSpeed accepts values 1–100 and rejects values outside that range with a clear English error message."
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "text": "Update the placeholder messaging used by SectionPlaceholderPanel so it does not appear for sections that are implemented (Throttle and Scooter Tuning), and keep any remaining placeholder user-facing text in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "It is showing that this feature is not available. This feature is not yet available. Check back soon for updates."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The text “This feature is not yet available. Check back soon for updates.” is not shown when viewing Scooter Tuning or Throttle.",
+        "Any remaining placeholder sections continue to display English-only text."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Use English for all user-facing UI text."
+  ],
+  "nonGoals": [
+    "Do not add third-party authentication providers or re-introduce a sign-in-gated flow.",
+    "Do not implement the separate “Fuel Management” placeholder section unless explicitly requested.",
+    "Do not add real vehicle integrations or claim real-world vehicle control."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

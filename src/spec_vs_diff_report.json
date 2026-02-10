@@ -1,0 +1,69 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T09:08:27.371Z",
+  "summary": "Diff adds a real Throttle panel with React Query hooks and updates Scooter Tuning UI to include a Max Speed slider with a 1–100 range. Backend changes show anonymous access for Car Tuning config (no authorization guard), plus a migration module adding throttleSettings storage, but the diff summary does not provide evidence that all required backend endpoints/validations for Scooter Tuning, Fuel Injection, and Throttle are implemented/updated.",
+  "missing_requirements": [
+    {
+      "id": "REQ-22",
+      "requirement": "Fix the backend so anonymous users can load and save Car Tuning, Scooter Tuning, and Fuel Injection settings without authorization traps, and ensure the frontend panels no longer show generic load-failed banners under normal use.",
+      "reason": "backend/main.mo evidence explicitly comments/removes authorization only for Car Tuning (tuningConfigs). The diff summary does not show corresponding anonymous-safe backend methods for Scooter Tuning or Fuel Injection (or that their endpoints no longer trap on anonymous), and the file is truncated before any scooter/fuel sections could be verified.",
+      "evidence": [
+        "backend/main.mo (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "requirement": "Persist/reload Throttle (1–10) via backend with React Query + optimistic update, including backend-side validation preventing values outside 1–10 with clear English errors.",
+      "reason": "Frontend Throttle panel and hooks are added (including client-side validation and optimistic updates), and backend storage migration adds throttleSettings, but the diff summary does not show backend/main.mo implementing getThrottleSetting/saveThrottleSetting methods or backend-side validation/error messages.",
+      "evidence": [
+        "frontend/src/components/ThrottlePanel.tsx",
+        "frontend/src/hooks/useThrottleSetting.ts",
+        "backend/migration.mo",
+        "backend/main.mo (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "requirement": "Align backend validation/defaults so Scooter maxSpeed accepts 1–100 inclusive and rejects out-of-range with clear English error messages.",
+      "reason": "UI slider range is set to 1–100, but the diff summary does not show any backend validation/default updates for scooter maxSpeed (backend/main.mo is truncated before scooter validation can be confirmed).",
+      "evidence": [
+        "frontend/src/components/ScooterTuningPanel.tsx",
+        "backend/main.mo (truncated)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added a new backend migration module and wired actor migration via `(with migration = Migration.run)`.",
+      "reason": "BuildRequest does not ask for introducing a migration system; it only constrains backend to remain a single Motoko actor.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo (truncated)"
+      ]
+    },
+    {
+      "description": "Added/retained a 'Fuel Management' placeholder route/panel in App routing.",
+      "reason": "Non-goals explicitly say not to implement the separate “Fuel Management” placeholder section unless explicitly requested, yet App.tsx includes a Fuel Management placeholder panel.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CarTuningPanel.tsx",
+    "frontend/src/components/FuelInjectionPanel.tsx",
+    "frontend/src/components/ScooterTuningPanel.tsx",
+    "frontend/src/components/SectionPlaceholderPanel.tsx",
+    "frontend/src/components/ThrottlePanel.tsx",
+    "frontend/src/components/TuningSlider.tsx",
+    "frontend/src/hooks/useThrottleSetting.ts",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json"
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "Build a futuristic black-themed app to control car tuning settings and switch driving modes (sports, classic, city), primarily for demonstration/show-off purposes, without any sign-in/auth flow.",
+  "architectural_notes": [
+    "No sign-in/authentication (e.g., Internet Identity) should be required; configuration should not depend on an authenticated principal."
+  ],
+  "known_issues": [
+    "User reports they cannot see any devices; current UI may not include a Devices section/panel.",
+    "Car tuning configuration fails to load (error: “Failed to load tuning configuration. Please try refreshing the page.”).",
+    "Scooter tuning configuration fails to load (error: “Failed to load scooter tuning configuration. Please try refreshing the page.”).",
+    "Fuel Injection section/panel is “giving problem” (not working as expected).",
+    "Throttle control is missing/non-functional; user expects a 1–10 slider.",
+    "Scooter “Max Speed” option is missing and/or still shows a “feature not available yet” placeholder; user expects a 1–100 speed slider."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-build-a-single-page-ui-that-lets-the-user-switch-car-mode-between-sports-classic-and-city-and-adjust-tuning-parameters-using-futuristic-looking-controls-e-g-segmented-mode-selector-sliders-knobs",
+      "title": "Build a single-page UI that lets the user switch car mode between Sports, Classic, and City, and adjust tuning parameters using futuristic-looking controls (e.g., segmented mode selector + sliders/knobs).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-consistent-futuristic-black-theme-across-the-app-dark-surfaces-high-contrast-typography-subtle-neon-accents-to-match-the-user-s-requested-look",
+      "title": "Implement a consistent futuristic black theme across the app (dark surfaces, high-contrast typography, subtle neon accents) to match the user’s requested look.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-frontend-to-the-backend-using-react-query-load-the-current-configuration-optimistically-update-mode-parameters-and-handle-validation-errors-with-clear-english-error-messages",
+      "title": "Wire the frontend to the backend using React Query: load the current configuration, optimistically update mode/parameters, and handle validation errors with clear English error messages.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clear-demo-show-off-indicator-that-this-app-does-not-connect-to-a-real-vehicle-and-ensure-no-claims-imply-real-car-control-without-integrations",
+      "title": "Add a clear “Demo / Show-off” indicator that this app does not connect to a real vehicle, and ensure no claims imply real car control without integrations.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-to-enhance-the-futuristic-look-and-render-them-from-frontend-public-assets-generated-no-backend-image-routing",
+      "title": "Add generated static image assets to enhance the futuristic look and render them from frontend/public/assets/generated (no backend image routing).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-sign-in-gated-flow-from-the-ui-so-the-car-tuning-interface-is-accessible-immediately-without-requiring-internet-identity-authentication",
+      "title": "Remove the sign-in gated flow from the UI so the car tuning interface is accessible immediately without requiring Internet Identity authentication.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-sign-in-sign-out-controls-from-the-header-and-ensure-no-login-logout-button-is-rendered-anywhere-in-the-app",
+      "title": "Remove sign-in/sign-out controls from the header and ensure no login/logout button is rendered anywhere in the app.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-profile-setup-flow-name-capture-modal-and-related-profile-queries-so-the-app-does-not-prompt-for-or-require-a-user-profile-to-use-tuning-controls",
+      "title": "Remove the profile setup flow (name capture modal and related profile queries) so the app does not prompt for or require a user profile to use tuning controls.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-demo-notice-banner-and-any-demo-application-demonstration-messaging-from-the-ui-so-users-never-see-demo-showcase-labels-anywhere-in-the-app",
+      "title": "Remove the Demo notice/banner and any “Demo Application” / “demonstration” messaging from the UI so users never see demo/showcase labels anywhere in the app.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-top-horizontal-swipe-drag-menu-carousel-in-the-header-area-that-lets-the-user-scroll-left-right-to-reveal-many-feature-icons-with-labels-e-g-tuning-scooter-tuning-oil-change-fuel-throttle-etc-the-menu-must-support-both-touch-swipe-mobile-and-mouse-drag-trackpad-scroll-desktop",
+      "title": "Add a top horizontal swipe/drag menu (carousel) in the header area that lets the user scroll left/right to reveal many feature icons with labels (e.g., “Tuning”, “Scooter Tuning”, “Oil Change”, “Fuel”, “Throttle”, etc.). The menu must support both touch swipe (mobile) and mouse drag/trackpad scroll (desktop).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-menu-selection-behavior-clicking-tapping-an-icon-in-the-top-carousel-switches-the-main-content-area-to-the-corresponding-section-the-existing-car-tuning-ui-current-cartuningpanel-must-remain-available-as-one-of-the-sections-e-g-tuning",
+      "title": "Implement menu selection behavior: clicking/tapping an icon in the top carousel switches the main content area to the corresponding section. The existing car tuning UI (current CarTuningPanel) must remain available as one of the sections (e.g., “Tuning”).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-for-carousel-items-that-do-not-yet-have-implemented-functionality-e-g-oil-change-fuel-scooter-tuning-display-a-consistent-placeholder-panel-in-the-main-content-area-with-english-user-facing-text-indicating-the-section-is-not-implemented-yet-avoid-any-demo-showcase-wording",
+      "title": "For carousel items that do not yet have implemented functionality (e.g., “Oil Change”, “Fuel”, “Scooter Tuning”), display a consistent placeholder panel in the main content area with English user-facing text indicating the section is not implemented yet (avoid any “demo/showcase” wording).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-top-carousel-menu-is-accessible-menu-items-must-be-focusable-operable-via-keyboard-and-expose-readable-english-labels-for-assistive-technologies",
+      "title": "Ensure the top carousel menu is accessible: menu items must be focusable, operable via keyboard, and expose readable English labels for assistive technologies.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-placeholder-content-for-the-scooter-tuning-section-with-an-implemented-scooter-tuning-panel-that-lets-users-configure-scooter-performance-settings-including-at-minimum-a-max-speed-control-and-at-least-two-additional-scooter-performance-controls",
+      "title": "Replace the current placeholder content for the “Scooter Tuning” section with an implemented Scooter Tuning panel that lets users configure scooter performance settings, including at minimum a “Max Speed” control and at least two additional scooter performance controls.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-backend-storage-and-apis-for-scooter-performance-settings-so-scooter-tuning-values-persist-and-reload-following-the-same-react-query-pattern-used-for-car-tuning-configuration",
+      "title": "Add backend storage and APIs for scooter performance settings so Scooter Tuning values persist and reload, following the same React Query pattern used for car tuning configuration.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-placeholder-content-for-the-oil-change-section-with-an-implemented-oil-change-panel-that-indicates-everything-is-ok-and-no-action-is-required",
+      "title": "Replace the current placeholder content for the “Oil Change” section with an implemented Oil Change panel that indicates everything is OK and no action is required.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-fuel-injection-option-to-the-top-carousel-menu-and-implement-a-fuel-injection-panel-that-allows-the-user-to-adjust-how-much-fuel-is-injected",
+      "title": "Add a “Fuel Injection” option to the top carousel menu and implement a Fuel Injection panel that allows the user to adjust how much fuel is injected.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-backend-storage-and-apis-for-fuel-injection-settings-so-the-fuel-injection-amount-persists-and-reloads-and-wire-the-fuel-injection-panel-to-these-apis-using-react-query-with-optimistic-updates-and-clear-error-handling",
+      "title": "Add backend storage and APIs for fuel injection settings so the Fuel Injection amount persists and reloads, and wire the Fuel Injection panel to these APIs using React Query with optimistic updates and clear error handling.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-backend-so-anonymous-users-can-load-and-save-car-tuning-scooter-tuning-and-fuel-injection-settings-without-authorization-traps-and-ensure-the-frontend-panels-no-longer-show-the-generic-load-failed-banners-for-these-sections-under-normal-use",
+      "title": "Fix the backend so anonymous users can load and save Car Tuning, Scooter Tuning, and Fuel Injection settings without authorization traps, and ensure the frontend panels no longer show the generic load-failed banners for these sections under normal use.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-throttle-section-as-a-real-panel-replace-the-placeholder-with-a-working-slider-control-that-lets-users-set-throttle-from-1-to-10-and-persist-reload-the-value-using-the-same-react-query-optimistic-update-pattern-as-other-settings-panels",
+      "title": "Implement the Throttle section as a real panel (replace the placeholder) with a working slider control that lets users set Throttle from 1 to 10, and persist/reload the value using the same React Query + optimistic update pattern as other settings panels.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-scooter-tuning-panel-provides-a-max-speed-control-with-a-slider-range-from-1-to-100-inclusive-and-align-backend-validation-defaults-so-saving-within-1-100-succeeds-without-errors",
+      "title": "Ensure the Scooter Tuning panel provides a Max Speed control with a slider range from 1 to 100 (inclusive), and align backend validation/defaults so saving within 1–100 succeeds without errors.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-placeholder-messaging-used-by-sectionplaceholderpanel-so-it-does-not-appear-for-sections-that-are-implemented-throttle-and-scooter-tuning-and-keep-any-remaining-placeholder-user-facing-text-in-english",
+      "title": "Update the placeholder messaging used by SectionPlaceholderPanel so it does not appear for sections that are implemented (Throttle and Scooter Tuning), and keep any remaining placeholder user-facing text in English.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Provide controls to change car tuning settings from the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Allow switching car mode between Sports, Classic, and City",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Design a futuristic UI with a black theme",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Create backend data models and API methods to store and retrieve a user’s car tuning configuration, including a driving mode (Sports, Classic, City) and adjustable tuning parameters (at minimum: suspension stiffness, steering sensitivity, throttle response, and brake bias).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Remove sign-in/authentication from the app (no Internet Identity login required).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Update the backend so anonymous callers can read and write tuning configuration without authorization failures (no traps/errors solely due to being unauthenticated).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Remove any “Demo / Show-off / Demo Application” messaging or indicators from the UI (banner and any other mentions).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add a Devices UI section/panel so the user can see connected devices/models and switch between them (e.g., scooter model toggle + details screen).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add a top horizontal swipe/slider menu (carousel) with multiple feature icons (e.g., scooter tuning, oil change, fuel, throttle, etc.) that the user can scroll left/right to access sections.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Expand the “Scooter Tuning” section with configurable scooter performance settings (e.g., max speed and additional tuning options).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add an “Oil Change” section in the carousel with a simple status/confirmation-style UI indicating everything is OK (no extra steps needed).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Add a “Fuel Injection” option/section that lets the user adjust how much fuel is injected (fuel injection amount control).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Implement a Throttle control with a working slider UI ranging from 1 to 10 (instead of empty/non-functional control).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Ensure Scooter Tuning includes a working Max Speed control (not a placeholder) with a slider range from 1 to 100.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Futuristic black-themed car tuning demo app with driving modes",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
